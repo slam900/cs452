@@ -17,8 +17,8 @@ int main(int argc, char **argv) {
 	int size;
 	if (argc > 1) {
 		// First argument is size
-		char *str = argv[1];
-		size = atoi(str);
+		/* char *str = argv[1]; */
+		size = atoi(argv[1]);
 	} else
 		size = 10;
 	
@@ -26,11 +26,13 @@ int main(int argc, char **argv) {
 	for (i = 0; i <= size; ++i)
 		printf("%d: %d\n", i, s[i]);
 	
+	free(s);
+	
 	return 0;
 }
 
 int *sieve(int n) {
-	int *nums = (int*)malloc(n * sizeof(int) + 1);
+	int *nums = (int*)malloc((n + 1) * sizeof(int));
 	nums[0] = 0;
 	nums[1] = 0;
 
