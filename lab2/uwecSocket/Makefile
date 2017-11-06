@@ -8,3 +8,4 @@ Node: Node.c uwecSocket.c primes.c
 
 clean:
 	rm -i Head Node
+
