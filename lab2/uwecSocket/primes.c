@@ -9,6 +9,13 @@ int countPrimes(int start, int end) { //[start, end)
 	return primeCount;
 }
 
+void printPrimes(int start, int end) {
+	int i;
+	for (i = start; i < end; i++)
+		if (isPrime(i))
+			printf("%d\n", i);
+}
+
 int isPrime(int n) {
 	int isPrime = 1;
 	int i = 2;
