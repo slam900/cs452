@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "primes.h"
 
 int countPrimes(int start, int end) { //[start, end)
