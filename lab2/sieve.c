@@ -6,7 +6,9 @@ int *sieve(int);
 int main(int argc, char **argv) {
 	printf("argc: %d\n", argc);
 	printf("argv: ");
-	for (int i = 0; i < argc; ++i)
+
+	int i;
+	for (i = 0; i < argc; ++i)
 		printf("%s ", argv[i]);
 
 	printf("\n");
@@ -21,7 +23,7 @@ int main(int argc, char **argv) {
 		size = 10;
 	
 	int *s = sieve(size);
-	for (int i = 0; i <= size; ++i)
+	for (i = 0; i <= size; ++i)
 		printf("%d: %d\n", i, s[i]);
 	
 	return 0;
@@ -31,7 +33,9 @@ int *sieve(int n) {
 	int *nums = (int*)malloc(n * sizeof(int) + 1);
 	nums[0] = 0;
 	nums[1] = 0;
-	for (int i = 2; i <= n; ++i)
+
+	int i;
+	for (i = 2; i <= n; ++i)
 		nums[i] = 1;
 	
 	int p = 2;
