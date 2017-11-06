@@ -10,7 +10,7 @@
 // Like new ServerSocket in Java
 int setupServerSocket(int portno) {
 
-	// Get a socket of the right type
+	// Get a socket of the right type. sockfd: socket file descriptor
 	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sockfd < 0) {
 		printf("ERROR opening socket");
