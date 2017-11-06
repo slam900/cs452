@@ -1,5 +1,14 @@
 #include "primes.h"
 
+int countPrimes(int start, int end) { //[start, end)
+	int primeCount = 0;
+	int i;
+	for (i = start; i < end; i++)
+		if (isPrime(i))
+			primeCount++;
+	return primeCount;
+}
+
 int isPrime(int n) {
 	int isPrime = 1;
 	int i = 2;
@@ -10,13 +19,4 @@ int isPrime(int n) {
 		i++;
 	}
 	return isPrime;
-}
-
-int countPrimes(int start, int end) { //[start, end)
-	int primeCount = 0;
-	int i;
-	for (i = start; i < end; i++)
-		if (isPrime(i))
-			primeCount++;
-	return primeCount;
 }
