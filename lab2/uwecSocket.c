@@ -124,3 +124,21 @@ int readInt(int socket) {
 	}
 	return response;
 }
+
+void writeChar(char x, int socket) {
+	int n = write(socket, &x, sizeof(char));
+	if (n < 0) {
+		printf("ERROR writing to socket\n");
+		exit(1);
+	}
+}
+
+char readChar(int socket) {
+	char response;
+	int n = read(socket, &response, sizeof(char));
+	if (n < 0) {
+		printf("ERROR reading from socket\n");
+		exit(1);
+	}
+	return response;
+}

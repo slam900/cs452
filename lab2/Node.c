@@ -12,15 +12,29 @@ int main() {
 	/* else { */
 
 
-	int socket = callServer("thing0.cs.uwec.edu", 9555);
+	int socket = callServer("thing0.cs.uwec.edu", 9595);
 	printf("\n");
 
-	int msg;
-	while (msg < 10) {
-		msg = readInt(socket);
-		printf("Read %d\n", msg);
-		msg++;
-		writeInt(msg, socket);
-	}
+	char num = 0;
+	char nums[10];
+	int i;
+
+	num = readChar(socket);
+	printf("Read %d\n", num);
+	num = readChar(socket);
+	printf("This time read %d\n", num);
+	num = readChar(socket);
+	printf("This time read %d\n", num);
+
+
+	/* for (i = 0; i < 10; ++i) { */
+	/* 	num = readChar(socket); */
+	/* 	nums[i] = num; */
+	/* 	printf("Read %d\n", num); */
+	/* } */
+	/* for (i = 0; i < 10; ++i) */
+	/* 	printf("%d\n", nums[i]); */
+	//writeChar(nums, socket);
+
 	return 0;
 }
