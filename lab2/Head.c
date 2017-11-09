@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h> // malloc()
 #include <string.h>
 #include <math.h>
 
@@ -16,27 +17,16 @@ int main(int argc, char **argv) {
 	int max = readInt(client);
 	double sqrtMax = sqrt((double)max);
 	int lenInts = (max / 32) + 1;
-	int ints[lenInts];
+	int *ints = malloc(lenInts * sizeof(int));
 	memset(ints, 0, sizeof(ints));
-
-	int i;
-
-	// Display
-	/* int bitsInInt = 8 * sizeof(int); */
-	/* for (i = 0; i < bitsInInt * lenInts; ++i) { */
-	/* 	printf("%d", getBit(ints, i)); */
-		
-	/* 	// Separate each int with newline */
-	/* 	if (i % 32 == 31) */
-	/* 		printf("\n"); */
-	/* } */
-	/* printf("\n"); */
 
 	// Read from server
 	int botPrime = readInt(client);
+	int i;
 	for (i = 0; i < lenInts; ++i)
 		ints[i] = readInt(client);
-			
+
+	// Print
 	printf("Recd: ");
 	i = botPrime;
 	int primesFound = 0;
@@ -76,6 +66,7 @@ int main(int argc, char **argv) {
 		for (i = 0; i < lenInts; ++i)
 			writeInt(ints[i], client);
 
+		// Print
 		printf("Sent: ");
 		i = botPrime;
 		int primesFound = 0;
@@ -106,7 +97,8 @@ int main(int argc, char **argv) {
 			botPrime = readInt(client);
 			for (i = 0; i < lenInts; ++i)
 				ints[i] = readInt(client);
-			
+
+			// Print
 			printf("Recd: ");
 			i = botPrime;
 			int primesFound = 0;

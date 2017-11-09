@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h> // malloc()
 #include <string.h> // memset()
 #include <math.h>   // sqrt()
 #include <ctype.h>  // isdigit()
@@ -7,15 +8,6 @@
 #include "bit.h"
 
 int main(int argc, char **argv) {
-	// Segfault if you input the address name
-	/* printf("Server address: "); */
-	/* char *addr[30]; */
-	/* scanf("%[^\n]s", addr); // %[^\n]s allows scanf to take in empty string */
-
-	/* if (addr[0] == '\0') // Empty string */
-	/* 	printf("Don't do that.\n"); */
-	/* else { */
-
 	// argv[1] is max
 
 	int socket = callServer("thing0.cs.uwec.edu", 9595);
@@ -40,32 +32,20 @@ int main(int argc, char **argv) {
 	// with the given max prime. 0s are the sieved composites.
 	// Further potential optimization (not in this program) is
 	// the 0 bits can be freed, e.g leave out all evens right
-	// away.
+	// away. Also, constant streaming data through the sockets
+	// would be faster than my one int at a time.
 	int lenInts = (max / 32) + 1;
-	int ints[lenInts];
+	int *ints = malloc(lenInts * sizeof(int));
 	memset(ints, 0, sizeof(ints));
 
 	// All numbers are potentially prime until sieved. Set to 1
 	for (i = 2; i <= max; ++i)
 		setBit(ints, i);
 
-	// Display
-	/* int bitsInInt = 8 * sizeof(int); */
-	/* for (i = 0; i < bitsInInt * lenInts; ++i) { */
-	/* 	printf("%d", getBit(ints, i)); */
-		
-	/* 	// Separate each int with newline */
-	/* 	if (i % 32 == 31) */
-	/* 		printf("\n"); */
-	/* } */
-	/* printf("\n"); */
-
 	// Set botPrime (should be 2)
 	int botPrime = 0;
 	while (!getBit(ints, botPrime))
 		botPrime++;
-
-	//printf("botPrime: %d\n", botPrime);
 
 	while (botPrime <= sqrtMax) {
 		// Clear multiples of botPrime, except botPrime
@@ -82,6 +62,7 @@ int main(int argc, char **argv) {
 		for (i = 0; i < lenInts; ++i)
 			writeInt(ints[i], socket);
 
+		// Print
 		printf("Sent: ");
 		i = botPrime;
 		int primesFound = 0;
@@ -113,6 +94,7 @@ int main(int argc, char **argv) {
 			for (i = 0; i < lenInts; ++i)
 				ints[i] = readInt(socket);
 
+			// Print
 			printf("Recd: ");
 			i = botPrime;
 			int primesFound = 0;
