@@ -1,0 +1,6 @@
+Run `make`.
+On thing0, run `./Head` with no arguments.
+On thing1 (or any other thingie), run `./Node 1000000`. Feel free
+   to raise or lower argument to select upper limit.
+Wait until terminated.
+To time, run `time ./Node 1000000`.
